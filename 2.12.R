@@ -16,6 +16,6 @@
 > outcome_apple = cbind(return_five,return_apple)
 > outcome_ibm <- data.frame(outcome_ibm)
 > outcome_apple <- data.frame(outcome_apple)
-> fit_apple = lm(return_five~return_apple,outcome_apple)
-> fit_ibm = lm(return_five~return_ibm,outcome_ibm)
+> fit_apple = lm(return_apple~return_five,outcome_apple)
+> fit_ibm = lm(return_ibm~return_five,outcome_ibm)
 > summary(fit_apple)
