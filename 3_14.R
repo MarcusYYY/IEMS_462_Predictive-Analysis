@@ -1,0 +1,10 @@
+cobb_data <- read.csv("Cobb-Douglas production function data.csv")
+View(cobb_data)
+fit0 <- lm(log(output) ~ log(capital) + log(labor), data = cobb_data)
+summary(fit0)
+vcov(fit0)
+
+fit1 =lm(I(log(output)-log(labor))~log(capital)+log(labor),data = cobb_data)
+annova(fit1)
+fit2 =lm(I(log(output)-log(labor))~I(log(capital)-log(labor)),data = cobb_data)
+anova(fit2)
