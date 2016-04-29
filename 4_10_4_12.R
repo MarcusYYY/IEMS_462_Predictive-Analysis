@@ -18,6 +18,8 @@ x <- ace_data[,1:3]
 plot(x)
 cor(x)
 fit_ace <- lm(y ~ x1 + x2 + x3,ace_data)
+//centering
+data_1 <- data.frame(scale(data,center = TRUE, scale = FALSE))
 vif(fit_ace)
 
 //ridge regression
