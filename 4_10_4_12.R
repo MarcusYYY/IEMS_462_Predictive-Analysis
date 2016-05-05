@@ -22,19 +22,12 @@ fit_ace <- lm(y ~ x1 + x2 + x3,ace_data)
 data_1 <- data.frame(scale(data,center = TRUE, scale = FALSE))
 vif(fit_ace)
 
-//ridge regression
-library(MASS)
-lridge <- ridge(y,x,lambda = seq(from = 0, to = 10, by = 0.001))
-traceplot(lridge)
-lridge <- ridge(y,x,lambda = 2)
-summary(lridge)
-
-traceplot(lridge,pch = 20, xlab = "Ridge parameter k",ylab = "cofficient")
-
-//lasso regression
-library("glmnet")
-fit.lasso = glmnet(x,y,alpha = 1)
-plot(fit.lasso,xvar = "lambda", label = TRUE)
-fit.lasso = glmnet(x,y,alpha = 1,lambda = 0.6)
-fit.lasso
-coef(fit.lasso)
+//ridge and lasso regression
+x = model.matrix(y~.,data_)
+x = as.matrix(x)
+ridge_fit = glmnet(x,y,alpha = 0)
+lasso_fit = glmnet(x,y,alpha = 1)
+plot(ridge_fit,xvar = "lambda", label = TRUE)
+plot(lasso_fit,xvar = "lambda", label = TRUE)
+ridgecv=cv.glmnet(x,y,alpha = 0,nfold = 3)
+lassocv=cv.glmnet(x,y,alpha = 1,nfold = 3)
